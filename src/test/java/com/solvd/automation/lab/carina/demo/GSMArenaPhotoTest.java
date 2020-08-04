@@ -20,6 +20,7 @@ import org.testng.asserts.SoftAssert;
 import java.util.Arrays;
 import java.util.List;
 
+
 import static com.solvd.automation.lab.carina.demo.locators.HomePageLocators.Header;
 import static com.solvd.automation.lab.carina.demo.locators.HomePageLocators.LoginForm;
 
