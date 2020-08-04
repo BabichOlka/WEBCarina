@@ -4,6 +4,7 @@ import com.qaprosoft.carina.core.foundation.AbstractTest;
 import com.qaprosoft.carina.core.foundation.utils.Configuration;
 import com.qaprosoft.carina.core.foundation.webdriver.DriverHelper;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
+import com.solvd.automation.lab.carina.demo.locators.HomePageLocators;
 import com.solvd.automation.lab.carina.demo.locators.LoginPageLocators;
 import com.solvd.automation.lab.carina.demo.locators.TestData;
 import org.apache.log4j.Logger;
@@ -159,8 +160,9 @@ public class GSMArenaHomePageTest extends AbstractTest {
         driverHelper.findExtendedWebElement(LoginForm.SUBMIT_BUTTON).click();
 
         String actualErrorOfWrongPasswordMessage =
-                driverHelper.findExtendedWebElement(LoginForm.WRONG_PASSWORD_LINK).getText()+driverHelper.findExtendedWebElement(LoginForm.WRONG_PASSWORD_REASON_LINK).getText();
+                driverHelper.findExtendedWebElement(LoginForm.WRONG_PASSWORD_REASON_LINK).getText();
         Assert.assertEquals(actualErrorOfWrongPasswordMessage, TestData.LOGIN_ERROR_OF_WRONG_PASSWORD_MESSAGE_EXPECTED,
                 "Message is not as expected!");
     }
+
 }

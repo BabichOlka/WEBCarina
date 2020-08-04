@@ -17,6 +17,7 @@ public class HomePageLocators {
         public static final By SIGN_UP = By.xpath("//a[@href='register.php3']");
         public static final By LOGIN_ICON_Of_REGISTERED_USER = By.className("icon-count");
 
+
     }
 
     public static class LoginForm {
@@ -28,6 +29,9 @@ public class HomePageLocators {
         public static final By FORGOT_PASSWORD_LINK = By.partialLinkText("I forgot my password");
         public static final By WRONG_PASSWORD_LINK = By.xpath("//h3[text()='Login failed.']");
         public static final By WRONG_PASSWORD_REASON_LINK = By.xpath("//p[text()='Reason: Wrong password.']");
+    }
+    public static class PhoneModels {
+        public static final By PHONE_LINK = By.xpath("//a[@class=\"module-phones-link\"]");
     }
 
 }
