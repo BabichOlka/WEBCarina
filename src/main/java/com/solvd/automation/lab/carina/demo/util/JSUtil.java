@@ -1,12 +1,11 @@
-package com.underarmour.phoenix.qa.util;
+package com.solvd.automation.lab.carina.demo.util;
 
-import java.util.function.Function;
-
+import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
+import java.util.function.Function;
 
 public class JSUtil {
 	private final static Logger LOGGER = Logger.getLogger(JSUtil.class);

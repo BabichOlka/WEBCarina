@@ -2,12 +2,10 @@ package com.solvd.automation.lab.carina.demo.gui.pages;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractPage;
-import com.solvd.automation.lab.carina.demo.locators.SignUpPageLocators;
-import com.solvd.automation.lab.carina.demo.locators.TestData;
-import org.openqa.selenium.By;
+import com.solvd.automation.lab.carina.demo.data.TestData;
+import com.solvd.automation.lab.carina.demo.gui.components.HeaderComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -43,6 +41,9 @@ public class GSMArenaSignUpPage extends AbstractPage {
     private ExtendedWebElement signUpInvalidEmailErrorLink;
     @FindBy(xpath = "//*[@id='body']/div/div[2]/p")
     private ExtendedWebElement signSuccessLink;
+
+    @FindBy(xpath = "//div[contains(@class, 'top-bar')]")
+    private HeaderComponent header;
 
 
     public GSMArenaSignUpPage(WebDriver driver) {

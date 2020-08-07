@@ -1,14 +1,13 @@
-package com.underarmour.phoenix.qa.util;
-
-import java.util.List;
-
-import org.openqa.selenium.*;
-import org.openqa.selenium.support.ui.WebDriverWait;
+package com.solvd.automation.lab.carina.demo.util;
 
 import com.google.common.base.Function;
 import com.qaprosoft.carina.core.foundation.commons.HTML;
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractUIObject;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.List;
 
 public class WaitUtil {
     public static final int WAIT_TIMEOUT_SEC = 30;
@@ -33,11 +32,12 @@ public class WaitUtil {
                                                                    final ExtendedWebElement element, final boolean refreshPage) {
         try {
             new WebDriverWait(browser, timeoutSec, pollIntervalMS).ignoring(StaleElementReferenceException.class)
-                    .until((Function<WebDriver, Boolean>) input -> {
+                    .until(input -> {
                         if (refreshPage)
                             browser.navigate().refresh();
                         return (element.getText().length() > 0);
-                    });
+                    }
+                    );
         } catch (TimeoutException e) {
             throw new RuntimeException(String.format("Element's text '%s' doesn't contains any text after %d sec waiting", element.getText(), WAIT_TIMEOUT_SEC));
         }

@@ -1,26 +1,12 @@
 package com.solvd.automation.lab.carina.demo;
 
 import com.qaprosoft.carina.core.foundation.AbstractTest;
-import com.qaprosoft.carina.core.foundation.crypto.CryptoTool;
-import com.qaprosoft.carina.core.foundation.utils.Configuration;
-import com.qaprosoft.carina.core.foundation.webdriver.DriverHelper;
-import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
+import com.solvd.automation.lab.carina.demo.data.TestData;
 import com.solvd.automation.lab.carina.demo.gui.pages.GSMArenaHomePage;
 import com.solvd.automation.lab.carina.demo.gui.pages.GSMArenaSignUpPage;
-import com.solvd.automation.lab.carina.demo.locators.SignUpPageLocators;
-import com.solvd.automation.lab.carina.demo.locators.SignUpPageLocators.*;
-import com.solvd.automation.lab.carina.demo.locators.TestData;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
-
-import java.util.Arrays;
-import java.util.List;
 
 import static com.solvd.automation.lab.carina.demo.locators.HomePageLocators.Header;
 
