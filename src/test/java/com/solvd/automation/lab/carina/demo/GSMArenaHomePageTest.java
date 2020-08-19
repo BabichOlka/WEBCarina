@@ -1,27 +1,11 @@
 package com.solvd.automation.lab.carina.demo;
 
 import com.qaprosoft.carina.core.foundation.AbstractTest;
-import com.qaprosoft.carina.core.foundation.utils.Configuration;
-import com.qaprosoft.carina.core.foundation.webdriver.DriverHelper;
-import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.solvd.automation.lab.carina.demo.gui.pages.GSMArenaHomePage;
-import com.solvd.automation.lab.carina.demo.gui.pages.HomePage;
-import com.solvd.automation.lab.carina.demo.locators.LoginPageLocators;
-import com.solvd.automation.lab.carina.demo.locators.TestData;
+import com.solvd.automation.lab.carina.demo.gui.TestData;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
-
-import java.util.Arrays;
-import java.util.List;
-
-import static com.solvd.automation.lab.carina.demo.locators.HomePageLocators.Header;
-import static com.solvd.automation.lab.carina.demo.locators.HomePageLocators.LoginForm;
 
 
 public class GSMArenaHomePageTest extends AbstractTest {
@@ -35,49 +19,43 @@ public class GSMArenaHomePageTest extends AbstractTest {
     @Test
     public void testValidateBaseElementsOnPageHeader() {
         homePage.open();
+        homePage.getHeader();
         Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened");
-        Assert.assertTrue(homePage.validateBaseElementsOnPageHeader(),
+        Assert.assertTrue(homePage.getHeader().validateBaseElementsOnPageHeader(),
                 "HomePageBaseElement page is not opened");
     }
 
-    @Test
-    public void testUserLoginFault() {
-        GSMArenaHomePage page = new GSMArenaHomePage(getDriver());
-        page.open();
-        Assert.assertNotNull(page.checkLoginForm(), "Login form was not opened!");
-
-        page.userLoginFault();
-        Assert.assertEquals(page.getLoginFaultMessage(), TestData.LOGIN_ERROR_OF_EMAIL_MESSAGE_EXPECTED, "Login fault message is not as expected!");
-    }
 
     @Test
     public void testUserLoginSuccess() {
         GSMArenaHomePage page = new GSMArenaHomePage(getDriver());
         page.open();
-        Assert.assertNotNull(page.checkLoginForm(), "Login form was not opened!");
 
-        page.userLoginSuccess();
-        Assert.assertEquals(page.getLoginSuccessMessage(), TestData.LOGIN_SUCCESS_MESSAGE_EXPECTED, "Login success message is not as expected!");
+        page.getHeader().getLoginForm().login(TestData.EXISTING_LOGIN, TestData.CORRECT_PASSWORD);
+        Assert.assertEquals(page.getHeader().getLoginForm().getLoginSuccessMessage(),
+                TestData.LOGIN_SUCCESS_MESSAGE_EXPECTED, "Login success message is not as expected!");
     }
 
     @Test
     public void testUserLoginInvalidEmail() {
         GSMArenaHomePage page = new GSMArenaHomePage(getDriver());
         page.open();
-        Assert.assertNotNull(page.checkLoginForm(), "Login form was not opened!");
 
-        page.userLoginInvalidEmail();
-        Assert.assertEquals(page.getEmailInput(), TestData.LOGIN_ERROR_OF_EMAIL_MESSAGE_EXPECTED, "Warning message is not as expected!");
+        page.getHeader().getLoginForm().login(TestData.BAD_LOGIN, TestData.CORRECT_PASSWORD);
+        Assert.assertEquals(page.getHeader().getLoginForm().getEmailInput(),
+                TestData.LOGIN_ERROR_OF_EMAIL_MESSAGE_EXPECTED,
+                "Warning message is not as expected!");
     }
 
     @Test
     public void testInvalidPassword() {
         GSMArenaHomePage page = new GSMArenaHomePage(getDriver());
         page.open();
-        Assert.assertNotNull(page.checkLoginForm(), "Login form was not opened!");
 
-        page.invalidPassword();
-        Assert.assertEquals(page.getPasswordInput(), TestData.LOGIN_ERROR_OF_PASSWORD_MESSAGE_EXPECTED, "Warning message is not as expected!");
+        page.getHeader().getLoginForm().login(TestData.CORRECT_LOGIN, TestData.BAD_PASSWORD);
+        Assert.assertEquals(page.getHeader().getLoginForm().getPasswordInputMessage(),
+                TestData.LOGIN_ERROR_OF_PASSWORD_MESSAGE_EXPECTED,
+                "Warning message is not as expected!");
 
     }
 
@@ -85,12 +63,34 @@ public class GSMArenaHomePageTest extends AbstractTest {
     public void testIncorrectPasswordLogIn() {
         GSMArenaHomePage page = new GSMArenaHomePage(getDriver());
         page.open();
-        Assert.assertNotNull(page.checkLoginForm(), "Login form was not opened!");
 
-        page.incorrectPasswordLogIn();
-        Assert.assertEquals(page.getloginFauitDescription(), TestData.SIGNUP_EXISTING_EMAIL_MESSAGE_EXPECTED,
+        page.getHeader().getLoginForm().login(TestData.CORRECT_LOGIN, TestData.INCORRECT_PASSWORD);
+        Assert.assertEquals(page.getHeader().getLoginForm().getLoginFauitMessage(),
+                TestData.SIGNUP_EXISTING_EMAIL_MESSAGE_EXPECTED,
                 "Login fault description is not as expected!");
     }
+    @Test
+    public void testValidateBaseElementsOnSearchBar(){
+    GSMArenaHomePage page = new GSMArenaHomePage(getDriver());
+    page.open();
+    Assert.assertTrue( page.openGSMArenaSearchBar().validateBaseElementsOnPageHeader(),
+            "SearchBarBaseElement page is not opened");
+}
+    @Test
+    public void testSearchIncorrectInfo(){
+        GSMArenaHomePage page = new GSMArenaHomePage(getDriver());
+        page.open();
+        page.openGSMArenaSearchBar().search(TestData.SEARCHBAR_INCORRECT_DATA);
+        Assert.assertEquals( page.openGSMArenaSearchBar().getNotFoundResultMessage(),
+                TestData.SEARCHBAR_NOT_FOUND_RESULT_MESSAGE_EXPECTED);
+    }
+    @Test
+    public void testSearchResult(){
+        GSMArenaHomePage page = new GSMArenaHomePage(getDriver());
+        page.open();
 
+        Assert.assertTrue(page.openGSMArenaSearchBar().searchResult(TestData.SEARCHBAR_INPUT_DATA),
+                "SearchResult is not right");
+    }
 
 }

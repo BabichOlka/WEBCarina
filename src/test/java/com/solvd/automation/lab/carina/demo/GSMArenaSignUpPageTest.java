@@ -1,36 +1,17 @@
 package com.solvd.automation.lab.carina.demo;
 
 import com.qaprosoft.carina.core.foundation.AbstractTest;
-import com.qaprosoft.carina.core.foundation.crypto.CryptoTool;
-import com.qaprosoft.carina.core.foundation.utils.Configuration;
-import com.qaprosoft.carina.core.foundation.webdriver.DriverHelper;
-import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.solvd.automation.lab.carina.demo.gui.pages.GSMArenaHomePage;
 import com.solvd.automation.lab.carina.demo.gui.pages.GSMArenaSignUpPage;
-import com.solvd.automation.lab.carina.demo.locators.SignUpPageLocators;
-import com.solvd.automation.lab.carina.demo.locators.SignUpPageLocators.*;
-import com.solvd.automation.lab.carina.demo.locators.TestData;
+import com.solvd.automation.lab.carina.demo.gui.TestData;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
-
-import java.util.Arrays;
-import java.util.List;
-
-import static com.solvd.automation.lab.carina.demo.locators.HomePageLocators.Header;
-
 
 public class GSMArenaSignUpPageTest extends AbstractTest {
 
-
     private static final Logger LOGGER = Logger.getLogger(GSMArenaSignUpPageTest.class);
     GSMArenaHomePage homePage = new GSMArenaHomePage(getDriver());
-
 
     @Test
     public void isPageOpened() {
@@ -63,7 +44,10 @@ public class GSMArenaSignUpPageTest extends AbstractTest {
         GSMArenaSignUpPage signUpPage = homePage.openGSMArenaSignUpPage();
         Assert.assertTrue(signUpPage.isPageOpened(), "GSMPhone page is not opened");
 
-        signUpPage.testCorrectData();
+        signUpPage.signUp(TestData.CORRECT_NICKNAME,TestData.CORRECT_LOGIN,TestData.CORRECT_PASSWORD);
+        signUpPage.clickIAgree1CheckBox();
+        signUpPage.clickIAgree2CheckBox();
+        signUpPage.clickSubmitButton();
         Assert.assertEquals(signUpPage.getCorrectDataMessage(), TestData.SIGNUP_SUCCESS_MESSAGE_EXPECTED,
                 "Message is not as expected!");
 
@@ -77,7 +61,7 @@ public class GSMArenaSignUpPageTest extends AbstractTest {
         GSMArenaSignUpPage signUpPage = homePage.openGSMArenaSignUpPage();
         Assert.assertTrue(signUpPage.isPageOpened(), "GSMPhone page is not opened");
 
-        signUpPage.testExistingNickName();
+        signUpPage.signUp(TestData.EXISTING_NICKNAME,null,null);
         Assert.assertEquals(signUpPage.getExistingNickNameMessage(), TestData.SIGNUP_EXISTING_NICKNAME_MESSAGE_EXPECTED,
                 "Message is not as expected!");
     }
@@ -90,7 +74,7 @@ public class GSMArenaSignUpPageTest extends AbstractTest {
         GSMArenaSignUpPage signUpPage = homePage.openGSMArenaSignUpPage();
         Assert.assertTrue(signUpPage.isPageOpened(), "GSMPhone page is not opened");
 
-        signUpPage.testShortNickName();
+        signUpPage.signUp(TestData.SHORT_NICKNAME,null,null);
         Assert.assertEquals(signUpPage.getShortNickNameMessage(), TestData.SIGNUP_SHORT_NICKNAME_MESSAGE_EXPECTED,
                 "Message is not as expected!");
     }
@@ -103,7 +87,11 @@ public class GSMArenaSignUpPageTest extends AbstractTest {
         GSMArenaSignUpPage signUpPage = homePage.openGSMArenaSignUpPage();
         Assert.assertTrue(signUpPage.isPageOpened(), "GSMPhone page is not opened");
 
-        signUpPage.testExistingEmail();
+        signUpPage.signUp(TestData.CORRECT_NICKNAME,TestData.EXISTING_LOGIN,
+                TestData.CORRECT_PASSWORD);
+        signUpPage.clickIAgree1CheckBox();
+        signUpPage.clickIAgree2CheckBox();
+        signUpPage.clickSubmitButton();
         Assert.assertEquals(signUpPage.getExistingEmailMessage(), TestData.SIGNUP_EXISTING_EMAIL_MESSAGE_EXPECTED,
                 "Message is not as expected!");
 

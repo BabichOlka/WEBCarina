@@ -2,6 +2,7 @@ package com.solvd.automation.lab.carina.demo.gui.pages;
 
 import com.qaprosoft.carina.core.foundation.webdriver.decorator.ExtendedWebElement;
 import com.qaprosoft.carina.core.gui.AbstractPage;
+import com.solvd.automation.lab.carina.demo.gui.components.HeaderComponent;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
@@ -19,6 +20,8 @@ public class GSMPhonePage extends AbstractPage {
     private ExtendedWebElement comments;
     @FindBy(className = "article-info-meta")
     private ExtendedWebElement options;
+    @FindBy(xpath = "//div[contains(@class, 'top-bar')]")
+    private HeaderComponent header;
 
 
     public GSMPhonePage(WebDriver driver) {
@@ -27,7 +30,7 @@ public class GSMPhonePage extends AbstractPage {
 
     public boolean validateBaseElements() {
 
-        return specList.isElementPresent() &&
+        return specList.isPresent() &&
                 model.isElementPresent() &&
                 photo.isElementPresent() &&
                 comments.isElementPresent()&&
