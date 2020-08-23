@@ -30,19 +30,17 @@ public class SearchBar extends AbstractUIObject {
     public SearchBar(WebDriver driver) {
         super(driver);
     }
-    protected List<ExtendedWebElement> searchBarElements =
-            Arrays.asList(searchBar,buttonAdvanced,buttonGo);
+
 
     public boolean validateBaseElementsOnPageHeader() {
         SoftAssert softAssert = new SoftAssert();
-        searchBarElements.forEach(locator ->
-                softAssert.assertNotNull(
-                        locator.isPresent(),
-                        String.format("%s is not found on the page.", locator.toString()
-                        )
-                )
-        );
-        softAssert.assertAll();
+        softAssert.assertNotNull(searchBar.isPresent(),
+                        String.format("%s is not found on the page.", searchBar.toString()));
+        softAssert.assertNotNull(searchBar.isPresent(),
+                String.format("%s is not found on the page.", buttonGo.toString()));
+        softAssert.assertNotNull(searchBar.isPresent(),
+                String.format("%s is not found on the page.",buttonAdvanced.toString()));
+                                softAssert.assertAll();
         return true;}
 
     public SearchBar openGSMArenaSearchBar() {

@@ -7,7 +7,7 @@ import org.apache.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class PhotoPageTest extends AbstractTest {
+public class PhonePageTest extends AbstractTest {
 
     private static final Logger LOGGER = Logger.getLogger(GSMArenaHomePageTest.class);
 
@@ -32,8 +32,6 @@ public class PhotoPageTest extends AbstractTest {
         Assert.assertTrue(homePage.isPageOpened(), "Home page is not opened");
 
         GSMPhonePage phonePage = homePage.openPhonePageFromGrid(3);
-
-        //Assert.assertTrue(phonePage.isPageOpened(), "GSMPhone page is not opened");
 
         Assert.assertTrue(phonePage.validateBaseElements(), "GSMPhoneBaseElements page was not validate!");
     }
