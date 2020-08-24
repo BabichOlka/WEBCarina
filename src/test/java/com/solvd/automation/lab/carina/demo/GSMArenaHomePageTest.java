@@ -88,9 +88,28 @@ public class GSMArenaHomePageTest extends AbstractTest {
     public void testSearchResult(){
         GSMArenaHomePage page = new GSMArenaHomePage(getDriver());
         page.open();
-
         Assert.assertTrue(page.openGSMArenaSearchBar().searchResult(TestData.SEARCHBAR_INPUT_DATA),
                 "SearchResult is not right");
     }
-
+    @Test
+    public void testValidateBaseElementsOnReviewsPage(){
+        GSMArenaHomePage page = new GSMArenaHomePage(getDriver());
+        page.open();
+        Assert.assertTrue( page.openGSMArenaReviewsPage().validateBaseElements(),
+                "SearchBarBaseElement page is not opened");
+    }
+    @Test
+    public void testSearchOnReviewsPage(){
+        GSMArenaHomePage page = new GSMArenaHomePage(getDriver());
+        page.open();
+        Assert.assertTrue( page.openGSMArenaReviewsPage().searchResult("sony"),
+                "SearchBarBaseElement page is not opened");
+    }
+    @Test
+    public void testSearchItemFromPopularTagsList(){
+        GSMArenaHomePage page = new GSMArenaHomePage(getDriver());
+        page.open();
+        Assert.assertTrue( page.openGSMArenaReviewsPage().searchItemFromPopularTagsList(1),
+                "SearchBarBaseElement page is not opened");
+    }
 }

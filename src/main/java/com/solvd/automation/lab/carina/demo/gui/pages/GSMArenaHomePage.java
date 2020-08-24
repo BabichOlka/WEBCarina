@@ -23,8 +23,12 @@ public class GSMArenaHomePage extends AbstractPage {
 
     @FindBy(xpath = "//h3[text()='Login failed.']")
     private ExtendedWebElement wrongPasswordLink;
+
     @FindBy(id = "topsearch-text")
     private ExtendedWebElement searchBar;
+
+    @FindBy(xpath = "//a[text()='Reviews'][1]")
+    private ExtendedWebElement reviews;
 
     public GSMArenaHomePage(WebDriver driver) {
         super(driver);
@@ -60,7 +64,10 @@ public class GSMArenaHomePage extends AbstractPage {
         searchBar.click();
         return new SearchBar(driver);
     }
-
+    public GSMArenaReviewsPage openGSMArenaReviewsPage() {
+        reviews.click();
+        return new GSMArenaReviewsPage(driver);
+    }
 }
 
 
